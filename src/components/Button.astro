@@ -1,11 +1,17 @@
 ---
-const { href, theme = "default" } = Astro.props;
+const { href } = Astro.props;
 let El = "button";
 if (href) El = "a";
 ---
 
-<El class="button" {href} data-type={theme}>
+<El class="button" {href}>
   <slot />
+  <svg width="40" height="12" xmlns="http://www.w3.org/2000/svg"
+    ><path
+      d="M34.05 0l5.481 5.527h.008v.008L40 6l-.461.465v.063l-.062-.001L34.049 12l-.662-.668 4.765-4.805H0v-1h38.206l-4.82-4.86L34.05 0z"
+      fill="#000"
+      fill-rule="nonzero"></path></svg
+  >
 </El>
 
 <style lang="scss">
@@ -13,37 +19,34 @@ if (href) El = "a";
 
   .button {
     display: inline-flex;
-    justify-content: center;
+    align-items: center;
+    gap: $size-8;
     cursor: pointer;
     text-decoration: none;
     line-height: 1;
     font-family: $button-font-family;
     font-size: $button-font-size;
+    letter-spacing: $button-letter-spacing;
     text-transform: $button-text-transform;
     font-weight: $button-font-weight;
     padding: $button-padding;
     border: $button-border;
     border-radius: $button-border-radius;
+    color: $color-neutral-900;
+    outline: 2px solid transparent;
     transition: 275ms ease;
 
-    &[data-type="primary"] {
-      background-color: $button-primary-background;
-      color: $button-primary-color;
+    &:is(:hover, :focus) {
+      color: $button-color-hover;
 
-      &:is(:hover, :focus) {
-        background-color: $button-primary-background-hover;
-        color: $button-primary-color-hover;
+      svg path {
+        fill: $button-color-hover;
       }
     }
 
-    &[data-type="accent"] {
-      background-color: $button-accent-background;
-      color: $button-accent-color;
-
-      &:is(:hover, :focus) {
-        background-color: $button-accent-background-hover;
-        color: $button-accent-color-hover;
-      }
+    &:focus {
+      outline-color: $color-neutral-900;
+      outline-offset: 4px;
     }
   }
 </style>

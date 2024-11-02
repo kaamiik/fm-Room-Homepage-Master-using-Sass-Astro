@@ -1,0 +1,150 @@
+---
+
+---
+
+<div class="hero">
+  <picture class="[ hero__picture ] [ js-hero-picture ]">
+    <source
+      class="js-hero-source"
+      srcset="/assets/images/desktop-image-hero-1.jpg"
+      media="(min-width: 31.25rem)"
+    />
+    <img
+      class="[ hero__image ] [ js-hero-image ]"
+      src="/assets/images/mobile-image-hero-1.jpg"
+      alt="1. A modern dining area with two white chairs featuring wooden legs and a rectangular wooden table with a white frame. A small bonsai tree in a black pot is placed on the table, adding a touch of greenery to the minimalist setting."
+      aria-live="assertive"
+    />
+  </picture>
+
+  <div class="hero__buttons">
+    <button class="[ hero__button ] [ js-last-btn ]" aria-label="PREVIOUS IMAGE"
+      ><svg width="14" height="24" xmlns="http://www.w3.org/2000/svg"
+        ><path
+          d="M13 0L1 12l12 12"
+          stroke="#FFF"
+          fill="none"
+          fill-rule="evenodd"></path></svg
+      ></button
+    >
+    <button class="[ hero__button ] [ js-next-btn ]" aria-label="NEXT IMAGE"
+      ><svg width="14" height="24" xmlns="http://www.w3.org/2000/svg"
+        ><path d="M1 0l12 12L1 24" stroke="#FFF" fill="none" fill-rule="evenodd"
+        ></path></svg
+      ></button
+    >
+  </div>
+</div>
+
+<style lang="scss">
+  @use "../styles/abstracts/" as *;
+
+  .hero {
+    display: grid;
+
+    @include mq(large) {
+      grid-column: 1 / 3;
+      grid-row: 1;
+    }
+
+    &__picture,
+    &__buttons {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    &__picture {
+      animation: slide-in 1000ms ease-in-out backwards;
+      animation-delay: 500ms;
+
+      @media (prefers-reduced-motion) {
+        animation: none;
+      }
+    }
+
+    &__image {
+      width: 100%;
+      height: 100%;
+      max-height: 34.375rem;
+      object-fit: cover;
+
+      @include mq(large) {
+        max-height: revert;
+      }
+    }
+
+    &__buttons {
+      display: flex;
+      align-items: center;
+
+      justify-self: end;
+      align-self: end;
+
+      animation: slide-buttons 1000ms ease-in-out backwards;
+      animation-delay: 500ms;
+      @include mq(large) {
+        animation: slide-buttons-desktop 1000ms ease-in-out backwards;
+        transform: translateX(100%);
+      }
+
+      @media (prefers-reduced-motion) {
+        animation: none;
+      }
+    }
+
+    &__button {
+      display: grid;
+      place-content: center;
+      background-color: $color-neutral-900;
+      outline: 2px solid transparent;
+      width: 56px;
+      height: 56px;
+      transition: background-color 270ms ease;
+      @include mq(large) {
+        width: 80px;
+        height: 80px;
+      }
+      &:is(:hover, :focus) {
+        background-color: $color-neutral-600;
+      }
+
+      &:focus-visible {
+        outline-color: $color-neutral-100;
+        outline-offset: -4px;
+      }
+    }
+  }
+
+  @keyframes slide-in {
+    from {
+      transform: translateY(-100%);
+      opacity: 0.25;
+    }
+    to {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-buttons {
+    from {
+      transform: translateY(-100%);
+      opacity: 0.25;
+    }
+    to {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-buttons-desktop {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(100%);
+      opacity: 1;
+    }
+  }
+</style>

@@ -3,25 +3,68 @@
 ---
 
 <footer class="site-footer">
-  <div class="container">
-    <p>Footer content here!</p>
-  </div>
+  <p>
+    Challenge by <a
+      href="https://www.frontendmentor.io?ref=challenge"
+      target="_blank">Frontend Mentor</a
+    >. Coded by <a href="https://www.frontendmentor.io/profile/kaamiik"
+      >Kamran Kiani</a
+    >.
+  </p>
 </footer>
 
 <style lang="scss">
   @use "../styles/abstracts" as *;
 
+  @keyframes slide-in-footer {
+    from {
+      transform: translateY(100%);
+      opacity: 0.25;
+    }
+    to {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+  }
+
   .site-footer {
     background-color: $footer-background-color;
+    font-size: $footer-font-size;
     color: $footer-text-color;
-
+    text-align: $footer-text-align;
+    grid-column: 1;
+    grid-row: 3;
+    padding: $size-1;
+    border-radius: 4px 4px 0 0;
+    width: fit-content;
+    margin-inline: auto;
+    animation: slide-in-footer 1000ms ease-in-out backwards;
+    animation-delay: 500ms;
     a {
+      position: relative;
+      display: inline-block;
       color: $footer-link-color;
       text-decoration: $footer-link-text-decoration;
       font-family: $footer-link-font-family;
+      outline: 2px solid transparent;
+      &::before {
+        content: "";
+        position: absolute;
+        background-color: $color-neutral-100;
+        left: 50%;
+        bottom: -2px;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+        transition: width 270ms ease-in-out;
+      }
+      &:hover::before {
+        width: 50px;
+      }
 
-      &:is(:hover, :focus) {
-        color: $footer-link-color-hover;
+      &:focus {
+        outline-color: $color-neutral-100;
+        outline-offset: 1px;
       }
     }
   }

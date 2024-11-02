@@ -1,0 +1,70 @@
+---
+import Button from "../components/Button.astro";
+---
+
+<div class="[ promo ] [ js-promo ]">
+  <div class="promo__content">
+    <h1 class="[ heading-1 ] [ js-title ]" aria-live="polite">
+      Discover innovative ways to decorate
+    </h1>
+    <p class="js-description" aria-live="polite">
+      We provide unmatched quality, comfort, and style for property owners
+      across the country. Our experts combine form and function in bringing your
+      vision to life. Create a room in your own style with our collection and
+      make your property a reflection of you and what you love.
+    </p>
+  </div>
+  <Button href="#">Shop now</Button>
+</div>
+
+<style lang="scss">
+  @use "../styles/abstracts/" as *;
+
+  .promo {
+    display: flex;
+    flex-direction: column;
+    gap: $size-10;
+    padding: $size-15 $size-8 $size-18;
+    margin-inline: auto;
+    animation: fade-in 1000ms ease-in-out backwards;
+    animation-delay: 500ms;
+    @include mq(large) {
+      gap: $size-7;
+      grid-column: 3 / 5;
+      grid-row: 1;
+      padding: 7.5rem 6.25rem 5.25rem;
+    }
+
+    @media (prefers-reduced-motion) {
+      animation: 0;
+    }
+    &__content {
+      display: flex;
+      flex-direction: column;
+      gap: $size-4;
+      max-width: 32rem;
+      @include mq(large) {
+        gap: $size-5;
+        max-width: 25rem;
+      }
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+</style>
