@@ -7,12 +7,24 @@ body {
   color: $body-text-color;
   background-color: $body-background-color;
   line-height: $body-line-height;
+  letter-spacing: $body-letter-spacing;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+}
+
+main {
+  grid-column: 1;
+  grid-row: 1 / -1;
+
+  display: grid;
+  @include mq(large) {
+    grid-template-columns: 2fr 2fr 10rem 2fr;
+    grid-template-rows: minmax(36rem, 2fr) 1fr;
+  }
 }
 
 a {
   color: $link-color;
-}
-
-a:is(:hover, :focus) {
-  color: $link-color-hover;
 }
